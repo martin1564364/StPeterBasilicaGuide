@@ -18,39 +18,36 @@ Statyczna strona internetowa pełniąca funkcję audioprzewodnika po Bazylice Ś
 
 ### 3.1 Miejsca (przystanki audioprzewodnika)
 
-Aplikacja zawiera **14 przystanków** w następującej kolejności:
+Aplikacja zawiera **12 przystanków** w następującej kolejności:
 
-| # | Przystanek (PL) | Przystanek (EN) |
-|---|---|---|
-| 1 | Pieta Michała Anioła | Michelangelo's Pietà |
-| 2 | Kaplica Najświętszego Sakramentu | Chapel of the Blessed Sacrament |
-| 3 | Konfesja / Grób Świętego Piotra | Confessio / Tomb of Saint Peter |
-| 4 | Baldachim Berniniego | Bernini's Baldachin |
-| 5 | Ołtarz Papieski | Papal Altar |
-| 6 | Groty Watykańskie | Vatican Grottoes |
-| 7 | Tron Świętego Piotra (Cathedra Petri) | Chair of Saint Peter |
-| 8 | Kopuła | The Dome |
-| 9 | Ołtarz Świętego Grzegorza Wielkiego | Altar of Saint Gregory the Great |
-| 10 | Ołtarz Prezentacji Najświętszej Maryi Panny | Altar of the Presentation of Mary |
-| 11 | Chrzcielnica | Baptismal Font |
-| 12 | Atrium i Drzwi Święte | Atrium and the Holy Doors |
-| 13 | Barka Świętego Piotra (Navicella) | Bark of Saint Peter (Navicella) |
-
-> **Uwaga:** Przystanek 3 (Konfesja) i Przystanek 4 (Baldachim) są ściśle ze sobą powiązane przestrzennie — Konfesja znajduje się bezpośrednio pod Baldachimem. Treści opisują je oddzielnie. Przystanek 5 (Ołtarz Papieski) to ołtarz stojący nad Konfesją.
+| # | Przystanek (PL) | Przystanek (EN) | Uwagi |
+|---|---|---|---|
+| 1 | Pieta Michała Anioła | Michelangelo's Pietà | przy wejściu po prawej stronie |
+| 2 | Kaplica Najświętszego Sakramentu | Chapel of the Blessed Sacrament | prawa nawa, wstęp tylko dla modlących się |
+| 3 | Grobowiec św. Piotra – baldachim | Tomb of St. Peter – Baldachin | Baldachim Berniniego nad głównym ołtarzem |
+| 4 | Grobowiec św. Piotra – ołtarz | Tomb of St. Peter – Altar | Ołtarz Papieski / Konfesja (grób pod ołtarzem) |
+| 5 | Groty Watykańskie | Vatican Grottoes | groby papieży, zejście pod bazylikę |
+| 6 | Tron św. Piotra (Cathedra Petri) | Chair of Saint Peter | Gloria Berniniego w absydzie |
+| 7 | Kopuła | The Dome | Michał Anioł, widok na Rzym |
+| 8 | Ołtarz Grzegorza Wielkiego | Altar of Gregory the Great | lewa nawa boczna |
+| 9 | Ołtarz Ofiarowania Maryi | Altar of the Presentation of Mary | lewa nawa |
+| 10 | Chrzcielnica | Baptismal Font | przy wejściu po lewej stronie |
+| 11 | Atrium i drzwi | The Atrium and the Doors | przedsionek, Porta Santa, Drzwi Filarete |
+| 12 | Łódź św. Piotra (Navicella) | The Barque of St. Peter | mozaika Giotta (kopia) w atrium |
 
 ### 3.2 Zawartość każdego przystanku
 
 Każdy przystanek musi zawierać:
-- **Obraz** — jedno zdjęcie lub ilustracja danego miejsca (format WebP z fallbackiem JPG)
+- **Obraz** — zdjęcie lub ilustracja danego miejsca (format WebP z fallbackiem JPG), źródło: domena publiczna / CC0
 - **Tytuł** — nazwa miejsca w języku polskim
-- **Tekst opisowy** — opis w języku polskim (ok. 300–500 słów), napisany stylem przewodnika
-- **Nagranie audio** — nagranie lektora w języku polskim, czas trwania ok. 2 minut (format MP3, kodowanie 128 kbps)
+- **Tekst opisowy** — opis w języku polskim (ok. 300–500 słów), styl przewodnika
+- **Nagranie audio** — lektor w języku polskim, czas trwania ok. 2 minut (format MP3, 128 kbps)
 
 ### 3.3 Nawigacja
 
 - Przyciski „Poprzedni" i „Następny" do poruszania się między przystankami
-- Wskaźnik postępu (np. „3 / 13")
-- Lista wszystkich przystanków (menu/spis treści) umożliwiająca przeskoczenie do wybranego miejsca
+- Wskaźnik postępu (np. „3 / 12")
+- Lista wszystkich przystanków (szuflada boczna) umożliwiająca przeskok do wybranego miejsca
 - Automatyczne przewijanie do góry przy zmianie przystanku
 
 ### 3.4 Odtwarzacz audio
@@ -59,7 +56,7 @@ Każdy przystanek musi zawierać:
 - Pasek postępu odtwarzania z możliwością przewijania
 - Wyświetlanie czasu (aktualny / całkowity)
 - Zatrzymanie odtwarzania przy przejściu do innego przystanku
-- Autoplay opcjonalny (zależny od zgody przeglądarki)
+- Obsługa autoplay zgodna z polityką przeglądarek (wymagana interakcja użytkownika)
 
 ---
 
@@ -69,7 +66,7 @@ Każdy przystanek musi zawierać:
 
 - Aplikacja musi działać w pełni offline po pierwszym załadowaniu strony
 - Implementacja jako **PWA (Progressive Web App)** z Service Workerem
-- Wszystkie zasoby (HTML, CSS, JS, obrazy, pliki audio) muszą być buforowane (Cache API)
+- Wszystkie zasoby (HTML, CSS, JS, obrazy, pliki audio) buforowane przez Cache API
 - Strategia cache: **Cache First** — zasoby serwowane z cache, sieć jako fallback przy aktualizacji
 - Plik `manifest.json` umożliwiający instalację aplikacji na ekranie głównym telefonu
 
@@ -88,11 +85,10 @@ Każdy przystanek musi zawierać:
 - Minimalny rozmiar elementów dotyku: 44×44 px (wytyczne Apple/Google)
 - Kontrast tekstu: minimum AA wg WCAG 2.1
 - Atrybuty `aria-label` na elementach interaktywnych
-- Obsługa czytników ekranu dla podstawowych funkcji
 
 ### 4.4 Kompatybilność przeglądarek
 
-- Safari iOS 15+ (priorytet — większość turystów używa iPhone'ów)
+- Safari iOS 15+ (priorytet)
 - Chrome Android 90+
 - Chrome/Firefox/Edge na desktopie (ostatnie 2 wersje)
 - Bez zależności od zewnętrznych bibliotek — czysty HTML/CSS/JS
@@ -101,7 +97,7 @@ Każdy przystanek musi zawierać:
 
 - Cały interfejs użytkownika w języku **polskim**
 - Wszystkie opisy i nagrania w języku **polskim**
-- Kodowanie znaków: UTF-8 (obsługa polskich liter: ą, ć, ę, ł, ń, ó, ś, ź, ż)
+- Kodowanie znaków: UTF-8
 
 ---
 
@@ -109,27 +105,26 @@ Każdy przystanek musi zawierać:
 
 ### 5.1 Teksty opisowe
 
-- Napisane w stylu przewodnika — przystępny, ale merytoryczny ton
+- Napisane w stylu przewodnika — przystępny, merytoryczny ton
 - Każdy opis: 300–500 słów
 - Zawierają: historię miejsca, znaczenie religijne/artystyczne, ciekawostki
-- Gotowe do użycia jako skrypt nagrania audio
+- Docelowo służą jako skrypt nagrania audio
 
 ### 5.2 Nagrania audio
 
-- Lektor: płeć dowolna, wyraźna dykcja, spokojne tempo
-- Czas: 2 minuty ± 15 sekund (ok. 250–280 słów w języku polskim)
+- Lektor: wyraźna dykcja, spokojne tempo
+- Czas: 2 minuty ± 15 sekund (~250–280 słów po polsku)
 - Format: MP3, 128 kbps, mono lub stereo
 - Nazewnictwo plików: `01-pieta.mp3`, `02-kaplica-sakramentu.mp3`, itd.
-- Placeholder: plik ciszy lub nagranie zastępcze podczas developmentu
+- Placeholder: plik ciszy podczas developmentu
 
 ### 5.3 Obrazy
 
 - Jedno zdjęcie na przystanek
-- Rozdzielczość: min. 800×600 px, maks. 1600×1200 px
+- Rozdzielczość: min. 800×600 px
 - Format: WebP (główny) + JPG (fallback)
 - Nazewnictwo: `01-pieta.webp`, `02-kaplica-sakramentu.webp`, itd.
-- Placeholder: szary prostokąt z nazwą miejsca podczas developmentu
-- Zdjęcia muszą być wolne od praw autorskich (CC0, domena publiczna lub własne)
+- Źródło: domena publiczna / CC0 (Wikimedia Commons)
 
 ---
 
@@ -137,43 +132,36 @@ Każdy przystanek musi zawierać:
 
 ### 6.1 Hosting
 
-- **GitHub Pages** — statyczny hosting, gałąź `gh-pages` lub folder `/docs`
-- Domena: `https://<username>.github.io/<reponame>/`
-- HTTPS wymagane (GitHub Pages zapewnia automatycznie)
+- **GitHub Pages** — statyczny hosting HTTPS
+- Domena: `https://martin1564364.github.io/StPeterBasilicaGuide/`
 - Brak backendu, brak bazy danych
 
 ### 6.2 Struktura repozytorium
 
 ```
 /
-├── index.html              # Główna strona aplikacji
-├── manifest.json           # PWA manifest
-├── service-worker.js       # Service Worker (obsługa offline)
+├── index.html
+├── manifest.json
+├── service-worker.js
+├── .gitignore
 ├── css/
-│   └── style.css           # Wszystkie style
+│   └── style.css
 ├── js/
-│   └── app.js              # Logika aplikacji
+│   └── app.js
 ├── data/
-│   └── stops.json          # Dane przystanków (tytuły, teksty)
-├── images/
-│   ├── 01-pieta.webp
-│   ├── 01-pieta.jpg        # Fallback
-│   └── ... (po 2 pliki na przystanek)
-├── audio/
-│   ├── 01-pieta.mp3
-│   └── ... (1 plik na przystanek)
+│   └── stops.json
+├── images/          (12 × WebP + 12 × JPG)
+├── audio/           (12 × MP3)
 ├── icons/
-│   ├── icon-192.png        # PWA ikona
-│   └── icon-512.png        # PWA ikona
+│   ├── icon-192.png
+│   └── icon-512.png
 ├── PLAN.md
 └── REQUIREMENTS.md
 ```
 
 ### 6.3 Brak zewnętrznych zależności
 
-- Brak CDN (jQuery, Bootstrap, Font Awesome itp.)
-- Brak zewnętrznych czcionek (Google Fonts itp.)
-- Brak zewnętrznych wywołań API
+- Brak CDN, frameworków JS, zewnętrznych czcionek ani wywołań API
 - Wszystkie zasoby lokalne — gwarantuje działanie offline
 
 ---
@@ -184,7 +172,6 @@ Każdy przystanek musi zawierać:
 - Mapa interaktywna bazyliki
 - Zakup biletów lub rezerwacje
 - Komentarze/oceny użytkowników
-- Śledzenie lokalizacji GPS
 - Backend / baza danych
 - Wersja natywna aplikacji (iOS/Android)
 
@@ -194,7 +181,7 @@ Każdy przystanek musi zawierać:
 
 | # | Kryterium | Priorytet |
 |---|---|---|
-| 1 | Wszystkie 13 przystanków wyświetla obraz, tekst i odtwarzacz audio | Krytyczny |
+| 1 | Wszystkie 12 przystanków wyświetla obraz, tekst i odtwarzacz audio | Krytyczny |
 | 2 | Aplikacja działa offline po pierwszym załadowaniu (Service Worker aktywny) | Krytyczny |
 | 3 | Interfejs poprawnie wyświetla się na iPhone SE (375 px) i iPhone 14 Pro (430 px) | Krytyczny |
 | 4 | Audio odtwarza się i można je pauzować na iOS Safari i Chrome Android | Krytyczny |

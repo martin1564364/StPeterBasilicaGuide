@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sp-guide-v1';
+const CACHE_NAME = 'sp-guide-v2';
 
 const PRECACHE_ASSETS = [
   './',
@@ -66,6 +66,20 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
+
+  /* Always try network first for dynamic content */
+  if (url.pathname.endsWith('/data/stops.json')) {
+    event.respondWith(
+      fetch(event.request).then((response) => {
+        if (response && response.status === 200 && response.type === 'basic') {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(event.request))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cached) => {

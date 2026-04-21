@@ -6,7 +6,7 @@ const state = {
   current: 0,
   drawerOpen: false,
 };
-const STOPS_DATA_VERSION = '2026-04-20-2';
+const STOPS_DATA_VERSION = '2026-04-21-1';
 
 /* === DOM REFS === */
 const $ = (id) => document.getElementById(id);
@@ -105,7 +105,7 @@ function renderStop(index) {
     stopTitle.textContent = stop.title;
     stopDesc.textContent = stop.description;
 
-    const preferredImage = stop.image || stop.imageFallback || '';
+    const primaryImage = stop.image || stop.imageFallback || '';
     const fallbackImage = stop.imageFallback || '';
 
     imgWebp.removeAttribute('srcset');
@@ -130,7 +130,7 @@ function renderStop(index) {
       }
     };
 
-    stopImgEl.src = preferredImage;
+    stopImgEl.src = primaryImage;
 
     stopAudio();
     audioEl.src = stop.audio;

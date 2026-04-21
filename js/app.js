@@ -6,7 +6,7 @@ const state = {
   current: 0,
   drawerOpen: false,
 };
-const STOPS_DATA_VERSION = '2026-04-20-1';
+const STOPS_DATA_VERSION = '2026-04-21-1';
 
 /* === DOM REFS === */
 const $ = (id) => document.getElementById(id);
@@ -105,11 +105,32 @@ function renderStop(index) {
     stopTitle.textContent = stop.title;
     stopDesc.textContent = stop.description;
 
-    imgWebp.srcset = stop.image;
-    stopImgEl.src = stop.imageFallback;
+    const preferredImage = stop.image || stop.imageFallback || '';
+    const fallbackImage = stop.imageFallback || '';
+
+    imgWebp.removeAttribute('srcset');
     stopImgEl.alt = stop.imageAlt || stop.title;
     stopImgEl.classList.add('loading');
-    stopImgEl.onload = () => stopImgEl.classList.remove('loading');
+    stopImgEl.dataset.fallbackApplied = '0';
+
+    stopImgEl.onload = () => {
+      stopImgEl.classList.remove('loading');
+    };
+
+    stopImgEl.onerror = () => {
+      if (stopImgEl.dataset.fallbackApplied === '1') {
+        stopImgEl.classList.remove('loading');
+        return;
+      }
+      stopImgEl.dataset.fallbackApplied = '1';
+      if (fallbackImage && stopImgEl.src !== new URL(fallbackImage, window.location.href).href) {
+        stopImgEl.src = fallbackImage;
+      } else {
+        stopImgEl.classList.remove('loading');
+      }
+    };
+
+    stopImgEl.src = preferredImage;
 
     stopAudio();
     audioEl.src = stop.audio;

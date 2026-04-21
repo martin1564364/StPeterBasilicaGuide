@@ -114,3 +114,7 @@ I zaktualizuj listę `PRECACHE_ASSETS` w `service-worker.js`.
 - Treści tekstowe: właściciel projektu
 - Ikony / SVG: właściciel projektu
 - Fotografie: CC-BY-SA (Wikimedia Commons, zgodnie z tabelą powyżej)
+
+## Odświeżenie GitHub Pages
+
+Ten commit zawiera techniczną zmianę w README, aby wymusić nowe wdrożenie strony na GitHub Pages.

@@ -6,6 +6,7 @@ const state = {
   current: 0,
   drawerOpen: false,
 };
+const STOPS_DATA_VERSION = '2026-04-20-2';
 
 /* === DOM REFS === */
 const $ = (id) => document.getElementById(id);
@@ -44,7 +45,7 @@ async function init() {
   monitorOffline();
 
   try {
-    const res = await fetch('data/stops.json');
+    const res = await fetch(`data/stops.json?v=${STOPS_DATA_VERSION}`, { cache: 'no-store' });
     state.stops = await res.json();
   } catch (e) {
     console.error('Nie można załadować danych przystanków:', e);
@@ -104,11 +105,32 @@ function renderStop(index) {
     stopTitle.textContent = stop.title;
     stopDesc.textContent = stop.description;
 
-    imgWebp.srcset = stop.image;
-    stopImgEl.src = stop.imageFallback;
+    const preferredImage = stop.image || stop.imageFallback || '';
+    const fallbackImage = stop.imageFallback || '';
+
+    imgWebp.removeAttribute('srcset');
     stopImgEl.alt = stop.imageAlt || stop.title;
     stopImgEl.classList.add('loading');
-    stopImgEl.onload = () => stopImgEl.classList.remove('loading');
+    stopImgEl.dataset.fallbackApplied = '0';
+
+    stopImgEl.onload = () => {
+      stopImgEl.classList.remove('loading');
+    };
+
+    stopImgEl.onerror = () => {
+      if (stopImgEl.dataset.fallbackApplied === '1') {
+        stopImgEl.classList.remove('loading');
+        return;
+      }
+      stopImgEl.dataset.fallbackApplied = '1';
+      if (fallbackImage && stopImgEl.src !== new URL(fallbackImage, window.location.href).href) {
+        stopImgEl.src = fallbackImage;
+      } else {
+        stopImgEl.classList.remove('loading');
+      }
+    };
+
+    stopImgEl.src = preferredImage;
 
     stopAudio();
     audioEl.src = stop.audio;
@@ -311,7 +333,9 @@ function onKeyDown(e) {
 /* === SERVICE WORKER === */
 function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  navigator.serviceWorker.register('service-worker.js').catch((e) => {
+  navigator.serviceWorker.register('service-worker.js').then((reg) => {
+    reg.update();
+  }).catch((e) => {
     console.warn('Service Worker rejestracja nieudana:', e);
   });
 }

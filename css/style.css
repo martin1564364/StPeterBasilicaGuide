@@ -359,7 +359,9 @@ img {
   flex-direction: column;
   padding-top: calc(56px + var(--safe-top));
   padding-bottom: calc(76px + var(--safe-bottom));
-  overflow-y: visible;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 
 .stop-image {

@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'sp-guide-v2';
+const CACHE_NAME = 'sp-guide-v3';
 
 const PRECACHE_ASSETS = [
   './',

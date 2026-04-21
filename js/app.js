@@ -146,6 +146,8 @@ function renderStop(index) {
     updateProgressDots();
 
     stopView.scrollTop = 0;
+    app.scrollTop = 0;
+    window.scrollTo(0, 0);
     stopView.classList.remove('fade-out');
     stopView.classList.add('fade-in');
     setTimeout(() => stopView.classList.remove('fade-in'), 300);

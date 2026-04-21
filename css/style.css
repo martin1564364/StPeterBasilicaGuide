@@ -154,7 +154,9 @@ img {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
   position: relative;
+  overflow: visible;
 }
 
 /* === TOP BAR === */
@@ -356,8 +358,7 @@ img {
   flex-direction: column;
   padding-top: calc(56px + var(--safe-top));
   padding-bottom: calc(76px + var(--safe-bottom));
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  overflow-y: visible;
 }
 
 .stop-image {

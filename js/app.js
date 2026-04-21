@@ -6,7 +6,7 @@ const state = {
   current: 0,
   drawerOpen: false,
 };
-const STOPS_DATA_VERSION = '2026-04-20-1';
+const STOPS_DATA_VERSION = '2026-04-20-2';
 
 /* === DOM REFS === */
 const $ = (id) => document.getElementById(id);

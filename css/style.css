@@ -157,8 +157,7 @@ img {
   height: 100dvh;
   min-height: -webkit-fill-available;
   position: relative;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
 }
 
 /* === TOP BAR === */
@@ -361,7 +360,8 @@ img {
   flex-direction: column;
   padding-top: calc(56px + var(--safe-top));
   padding-bottom: calc(76px + var(--safe-bottom));
-  overflow-y: visible;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
   overscroll-behavior: contain;
 }

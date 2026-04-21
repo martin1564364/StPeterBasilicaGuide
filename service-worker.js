@@ -9,7 +9,7 @@ const PRECACHE_ASSETS = [
   './css/style.css',
   './js/app.js',
   './data/stops.json',
-  /* images (SVG placeholders — replace with WebP/JPG when real photos available) */
+  /* images (fallback SVG, prefer WebP from stops.json) */
   './images/01-pieta.svg',
   './images/02-kaplica-sakramentu.svg',
   './images/03-baldachim.svg',

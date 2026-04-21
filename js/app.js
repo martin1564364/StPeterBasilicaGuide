@@ -105,32 +105,27 @@ function renderStop(index) {
     stopTitle.textContent = stop.title;
     stopDesc.textContent = stop.description;
 
-    const preferredImage = stop.image || stop.imageFallback || '';
+    const webpImage = stop.image || '';
     const fallbackImage = stop.imageFallback || '';
 
-    imgWebp.removeAttribute('srcset');
     stopImgEl.alt = stop.imageAlt || stop.title;
     stopImgEl.classList.add('loading');
-    stopImgEl.dataset.fallbackApplied = '0';
+
+    if (webpImage) {
+      imgWebp.srcset = webpImage;
+    } else {
+      imgWebp.removeAttribute('srcset');
+    }
 
     stopImgEl.onload = () => {
       stopImgEl.classList.remove('loading');
     };
 
     stopImgEl.onerror = () => {
-      if (stopImgEl.dataset.fallbackApplied === '1') {
-        stopImgEl.classList.remove('loading');
-        return;
-      }
-      stopImgEl.dataset.fallbackApplied = '1';
-      if (fallbackImage && stopImgEl.src !== new URL(fallbackImage, window.location.href).href) {
-        stopImgEl.src = fallbackImage;
-      } else {
-        stopImgEl.classList.remove('loading');
-      }
+      stopImgEl.classList.remove('loading');
     };
 
-    stopImgEl.src = preferredImage;
+    stopImgEl.src = fallbackImage || webpImage;
 
     stopAudio();
     audioEl.src = stop.audio;
